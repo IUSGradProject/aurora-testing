@@ -28,7 +28,7 @@ test('Signup fails with weak password', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Register' }).click();
   
-    await expect(page.getByText('Weak password.')).toBeVisible();
+    await expect(page.getByText('Password must be at least 8 characters, with uppercase, lowercase, number, and symbol.')).toBeVisible();
   });
   
 
