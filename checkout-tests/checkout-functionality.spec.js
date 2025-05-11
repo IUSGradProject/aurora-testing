@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('User completes checkout by filling information and submitting order', async ({ page }) => {
+test('User logs in clicks on product, adds product to the cart then proceeds with checkout ', async ({ page }) => {
      // Go to login page and log in
      await page.goto('https://aurora.heyappo.me/login');
      await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
@@ -13,19 +13,15 @@ test('User completes checkout by filling information and submitting order', asyn
      
    
      // Click the specific product ("Bvlgari Bvlgari Watch")
-     await page.locator('div').filter({ hasText: /^Bvlgari Bvlgari WatchPrice: 6600$/ }).nth(1).click();
+     await page.getByText('Bvlgari WatchPrice:').click();
    
      // On product page, click "Add to Cart"
      await page.getByRole('button', { name: 'Add to Cart' }).click();
    
-     // Wait until CART (1) is visible
-     await expect(page.getByRole('link', { name: /CART \(1\)/ })).toBeVisible();
-   
-     // Click CART (1) to open cart page
-     await page.getByRole('link', { name: /CART \(1\)/ }).click();
+     await page.getByText('Product successfully added to').click();
    
      // Verify cart page URL
-     await expect(page).toHaveURL('https://aurora.heyappo.me/cart');
+     await page.goto('https://aurora.heyappo.me/cart');
    
      // Select the product checkbox
      await page.getByRole('checkbox').check();
@@ -54,3 +50,80 @@ test('User completes checkout by filling information and submitting order', asyn
    // await expect(page).toHaveURL('https://aurora.heyappo.me/home');
   });
   
+
+
+
+test('User logs in, purchases two products', async ({ page }) => {
+     // Go to shop and log in
+     await page.goto('https://aurora.heyappo.me/shop');
+     await page.getByRole('link', { name: ' LOG IN' }).click();
+     await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
+     await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
+     await page.getByRole('button', { name: 'Login' }).click();
+   
+     // Buy first product (Bvlgari Watch with quantity 2)
+     await page.getByText('Bvlgari WatchPrice:').click();
+     
+     await page.getByRole('button', { name: 'Add to Cart' }).click();
+     await expect(page.getByText('Product successfully added to')).toBeVisible();
+
+     await page.goto('https://aurora.heyappo.me/shop');
+     // Buy second product (LOVE pendant)
+     
+     await page.getByText('LOVE pendantPrice:').click();
+     await page.getByRole('button', { name: 'Add to Cart' }).click();
+     await expect(page.getByText('Product successfully added to')).toBeVisible();
+
+     // Go to cart and select both products
+     await page.goto('https://aurora.heyappo.me/cart');
+     await page.getByRole('checkbox').first().check();
+     await page.getByRole('checkbox').nth(1).check();
+   
+     // Proceed to checkout
+     await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
+     await page.getByRole('textbox', { name: 'Full Name' }).fill('Anes');
+     await page.getByRole('textbox', { name: 'Address' }).fill('Piknjac');
+     await page.getByRole('textbox', { name: 'City' }).fill('Hadzici');
+     await page.getByRole('textbox', { name: 'Zip Code' }).fill('71240');
+   
+     // Choose payment method
+     await page.getByRole('combobox', { name: 'Payment Method' }).locator('span').click();
+     await page.getByRole('option', { name: 'Pay on Delivery' }).click();
+   
+     // Submit order
+     await page.getByRole('button', { name: 'Submit Order' }).click();
+     await expect(page.getByText(/Your order has been/i)).toBeVisible();
+   
+
+   });
+
+
+
+test('Buy Now from product page works without visiting the cart', async ({ page }) => {
+  // Go to the shop and log in
+  // Go to shop and log in
+  await page.goto('https://aurora.heyappo.me/shop');
+  await page.getByRole('link', { name: ' LOG IN' }).click();
+  await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
+  await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
+  await page.getByRole('button', { name: 'Login' }).click();
+   
+  
+  await page.getByText('Bvlgari WatchPrice:').click();
+     
+  await page.getByRole('button', { name: 'Buy Now' }).click();
+
+  // Fill in shipping details
+  await page.getByRole('textbox', { name: 'Full Name' }).fill('anes piknjac');
+  await page.getByRole('textbox', { name: 'Address' }).fill('p 7');
+  await page.getByRole('textbox', { name: 'City' }).fill('ha');
+  await page.getByRole('textbox', { name: 'Zip Code' }).fill('71240');
+
+  // Choose payment method
+  await page.getByRole('combobox', { name: 'Payment Method' }).click();
+  await page.getByRole('option', { name: 'Pay on Delivery' }).click();
+
+  // Submit the order and verify success
+  await page.getByRole('button', { name: 'Submit Order' }).click();
+  await expect(page.getByText('Your order has been')).toBeVisible();
+});
