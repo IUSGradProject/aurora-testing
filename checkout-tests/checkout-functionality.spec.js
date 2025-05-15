@@ -13,8 +13,8 @@ test('User logs in clicks on product, adds product to the cart then proceeds wit
      
    
      // Click the specific product ("Bvlgari Bvlgari Watch")
-     await page.getByText('Bvlgari WatchPrice:').click();
-   
+     await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+     await page.waitForTimeout(2000);
      // On product page, click "Add to Cart"
      await page.getByRole('button', { name: 'Add to Cart' }).click();
    
@@ -62,15 +62,15 @@ test('User logs in, purchases two products', async ({ page }) => {
      await page.getByRole('button', { name: 'Login' }).click();
    
      // Buy first product (Bvlgari Watch with quantity 2)
-     await page.getByText('Bvlgari WatchPrice:').click();
-     
+     await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+     await page.waitForTimeout(2000);
      await page.getByRole('button', { name: 'Add to Cart' }).click();
      await expect(page.getByText('Product successfully added to')).toBeVisible();
 
      await page.goto('https://aurora.heyappo.me/shop');
      // Buy second product (LOVE pendant)
-     
-     await page.getByText('LOVE pendantPrice:').click();
+     await page.getByRole('heading', { name: 'LOVE pendant' }).click();
+     await page.waitForTimeout(2000);
      await page.getByRole('button', { name: 'Add to Cart' }).click();
      await expect(page.getByText('Product successfully added to')).toBeVisible();
 
@@ -109,8 +109,8 @@ test('Buy Now from product page works without visiting the cart', async ({ page 
   await page.getByRole('button', { name: 'Login' }).click();
    
   
-  await page.getByText('Bvlgari WatchPrice:').click();
-     
+  await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Buy Now' }).click();
 
   // Fill in shipping details
@@ -127,3 +127,4 @@ test('Buy Now from product page works without visiting the cart', async ({ page 
   await page.getByRole('button', { name: 'Submit Order' }).click();
   await expect(page.getByText('Your order has been')).toBeVisible();
 });
+

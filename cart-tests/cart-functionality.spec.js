@@ -15,7 +15,9 @@ test('User logs in, adds item to cart, removes it, and sees empty cart message',
   await page.getByRole('button', { name: 'Login' }).click();
 
   // Click on a product
-  await page.getByText('Bvlgari WatchPrice:').click();
+  await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+
+  await page.waitForTimeout(2000);
 
   // Add product to cart
   await page.getByRole('button', { name: 'Add to Cart' }).click();
@@ -45,8 +47,10 @@ test('User logs in, adds product, and verifies cart update', async ({ page }) =>
     // Click on "SHOP" link (optional, depending on your navbar setup)
     await page.getByRole('link', { name: 'SHOP' }).click();
   
-   await page.getByText('Bvlgari WatchPrice:').click();
+    await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
   
+    await page.waitForTimeout(2000);
+
     // On the product page, click "Add to Cart"
     await page.getByRole('button', { name: 'Add to Cart' }).click();
   
@@ -82,8 +86,10 @@ test('User logs in, opens product page, adds product to cart, and verifies it', 
     await page.getByRole('link', { name: 'SHOP' }).click();
   
     // Find and click the specific product ("Bvlgari Bvlgari Watch") to enter product page
-    await page.getByText('Bvlgari WatchPrice:').click();
-  
+    await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+
+    await page.waitForTimeout(2000);
+
     // On the product page, click "Add to Cart"
     await page.getByRole('button', { name: 'Add to Cart' }).click();
   
@@ -118,8 +124,10 @@ test('User logs in, adds product to cart, proceeds to checkout, and verifies pro
     await page.getByRole('link', { name: 'SHOP' }).click();
   
     // Click the specific product ("Bvlgari Bvlgari Watch")
-    await page.getByText('Bvlgari WatchPrice:').click();
-  
+    await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+
+    await page.waitForTimeout(2000);
+
     // On product page, click "Add to Cart"
     await page.getByRole('button', { name: 'Add to Cart' }).click();
   
@@ -154,7 +162,9 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
   await page.getByRole('button', { name: 'Login' }).click();
 
   // Add product to cart
-  await page.getByText('Bvlgari WatchPrice:').click();
+  await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
+  await page.waitForTimeout(2000);
+
   await page.getByRole('button', { name: 'Add to Cart' }).click();
   
   await page.getByText('Product successfully added to').click();
