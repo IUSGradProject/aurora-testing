@@ -1,0 +1,13 @@
+name: Daily Availability Test
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Runs every day at 6 AM UTC
+
+jobs:
+  availability-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if site is up
+        run: |
+          curl -Is https://aurora.heyappo.me | head -n 1 | grep "200 OK"
