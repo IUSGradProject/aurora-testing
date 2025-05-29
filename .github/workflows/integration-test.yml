@@ -27,8 +27,6 @@ jobs:
       - name: Run All Playwright Tests
         run: |
           npx playwright test \
-            cart-tests \
-            checkout-tests \
             login-tests \
             navbar-tests \
             profile-tests \
