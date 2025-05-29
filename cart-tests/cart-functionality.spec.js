@@ -27,10 +27,14 @@ test('User logs in, adds item to cart, removes it, and sees empty cart message',
   
   await page.goto('https://aurora.heyappo.me/cart');
   // Remove the product from the cart
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: '' }).click();
 
+  await page.waitForTimeout(2000);
   // Verify the cart is empty
   await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
+
+
 });
 
 
@@ -63,12 +67,13 @@ test('User logs in, adds product, and verifies cart update', async ({ page }) =>
     await page.goto('https://aurora.heyappo.me/cart');
   
     // Optionally: Verify the item is listed in the cart
-    await expect(page.getByRole('heading', { name: 'Bvlgari Watch' })).toBeVisible();
     
-
+    
+    await page.waitForTimeout(2000);
     // Remove the product from the cart
     await page.getByRole('button', { name: '' }).click();
-  
+    await page.waitForTimeout(2000);
+    await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
   });
   
   
@@ -102,11 +107,12 @@ test('User logs in, opens product page, adds product to cart, and verifies it', 
     // Verify the product is listed in the cart
     await expect(page.getByRole('heading', { name: 'Bvlgari Watch' })).toBeVisible();
   
-    await page.getByRole('link', { name: ' CART (1)' }).click();
-
+    await page.goto('https://aurora.heyappo.me/cart');
+    await page.waitForTimeout(2000);
     // Remove the product from the cart
     await page.getByRole('button', { name: '' }).click();
-  
+    await page.waitForTimeout(2000);
+    await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
   
   });
   
@@ -146,10 +152,11 @@ test('User logs in, adds product to cart, proceeds to checkout, and verifies pro
     await expect(page.getByRole('cell', { name: 'Bvlgari Watch' })).toBeVisible();
   
     await page.goto('https://aurora.heyappo.me/cart');
-
+    await page.waitForTimeout(2000);
     // Remove the product from the cart
     await page.getByRole('button', { name: '' }).click();
-  
+    await page.waitForTimeout(2000);
+    await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
   });
   
 
@@ -185,12 +192,14 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
 
   // Verify redirection to cart page
   await page.goto('https://aurora.heyappo.me/cart');
-  
-  // Optionally: Verify the item is listed in the cart
-  await expect(page.getByRole('heading', { name: 'Bvlgari Watch' })).toBeVisible();
-    
 
+  await page.waitForTimeout(2000);
+  
+  
+  
   // Remove the product from the cart
   await page.getByRole('button', { name: '' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
 });
  

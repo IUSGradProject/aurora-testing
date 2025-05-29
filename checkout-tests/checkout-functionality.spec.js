@@ -24,6 +24,7 @@ test('User logs in clicks on product, adds product to the cart then proceeds wit
      await page.goto('https://aurora.heyappo.me/cart');
    
      // Select the product checkbox
+     await page.waitForTimeout(2000);
      await page.getByRole('checkbox').check();
    
      // Click "Proceed to Checkout"
@@ -42,7 +43,7 @@ test('User logs in clicks on product, adds product to the cart then proceeds wit
   
     // Submit the order
     await page.getByRole('button', { name: 'Submit Order' }).click();
-  
+    await page.waitForTimeout(2000);
     // Confirm success message
     await expect(page.getByText('Your order has been')).toBeVisible();
   
@@ -64,8 +65,10 @@ test('User logs in, purchases two products', async ({ page }) => {
      // Buy first product (Bvlgari Watch with quantity 2)
      await page.getByRole('heading', { name: 'Bvlgari Watch', exact: true }).click();
      await page.waitForTimeout(2000);
+     // On product page, click "Add to Cart"
      await page.getByRole('button', { name: 'Add to Cart' }).click();
-     await expect(page.getByText('Product successfully added to')).toBeVisible();
+     await page.waitForTimeout(2000);
+     await page.getByText('Product successfully added to').click();
 
      await page.goto('https://aurora.heyappo.me/shop');
      // Buy second product (LOVE pendant)
@@ -92,6 +95,7 @@ test('User logs in, purchases two products', async ({ page }) => {
    
      // Submit order
      await page.getByRole('button', { name: 'Submit Order' }).click();
+     await page.waitForTimeout(2000);
      await expect(page.getByText(/Your order has been/i)).toBeVisible();
    
 
@@ -125,6 +129,7 @@ test('Buy Now from product page works without visiting the cart', async ({ page 
 
   // Submit the order and verify success
   await page.getByRole('button', { name: 'Submit Order' }).click();
+  await page.waitForTimeout(2000);
   await expect(page.getByText('Your order has been')).toBeVisible();
 });
 
