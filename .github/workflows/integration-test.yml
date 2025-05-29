@@ -6,7 +6,7 @@ on:
     - cron: '0 */6 * * *'  # Every 6 hours
 
 jobs:
-  run-login-tests:
+  run-all-tests:
     runs-on: ubuntu-latest
 
     steps:
