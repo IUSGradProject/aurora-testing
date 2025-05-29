@@ -14,6 +14,8 @@ test('User buys product with Buy Now and sees it in purchase history', async ({ 
 
   // Navigate to product and use Buy Now
   await page.getByText('Bvlgari WatchPrice:').click();
+  await page.waitForTimeout(2000);
+
   await page.getByRole('button', { name: 'Buy Now' }).click();
 
   // Fill checkout form

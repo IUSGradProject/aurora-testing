@@ -182,5 +182,15 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
   // Verify total is updated accordingly (replace this with dynamic check if needed)
   const totalText = await page.getByText('Total: $432,005.99');
   await expect(totalText).toBeVisible();
+
+  // Verify redirection to cart page
+  await page.goto('https://aurora.heyappo.me/cart');
+  
+  // Optionally: Verify the item is listed in the cart
+  await expect(page.getByRole('heading', { name: 'Bvlgari Watch' })).toBeVisible();
+    
+
+  // Remove the product from the cart
+  await page.getByRole('button', { name: '' }).click();
 });
  

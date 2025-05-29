@@ -53,8 +53,9 @@ test('Logout redirects user to /login page', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
   await page.getByRole('button', { name: 'Login' }).click();
 
+  await page.waitForTimeout(2000);
   // Click the LOG OUT button
-  await page.getByRole('link', { name: 'LOG OUT' }).click();
+  await page.getByText('LOG OUT').click();
 
   // Expect to be redirected to the login page
   await expect(page).toHaveURL('https://aurora.heyappo.me/login');

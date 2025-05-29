@@ -119,3 +119,4 @@ test('Signup page "Log in" link redirects to /login', async ({ page }) => {
   
     await expect(page).toHaveURL('https://aurora.heyappo.me/login');
   });
+  

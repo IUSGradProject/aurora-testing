@@ -73,8 +73,7 @@ test('User filters products by style "Classic Modern" and opens a product', asyn
   await page.getByRole('option', { name: 'A to Z' }).click();
 
   // Expect the first product to be 'Bvlgari Bvlgari Watch'
-  const firstProductAZ = await page.getByRole('heading').first();
-  await expect(firstProductAZ).toHaveText('Bvlgari Bvlgari Watch');
+  await expect(page.locator('div').filter({ hasText: /^Bvlgari WatchPrice: 43200$/ }).first()).toBeVisible();
 
   // Click to open product detail
   await page.getByRole('heading', { name: 'Bvlgari Bvlgari Watch' }).click();

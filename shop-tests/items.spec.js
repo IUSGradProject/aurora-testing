@@ -5,7 +5,7 @@ test('Clicking a product opens the product detail page', async ({ page }) => {
   await page.goto('https://aurora.heyappo.me/shop');
 
   // Click on the product using the locator you provided
-  await page.locator('div').filter({ hasText: /^Bvlgari Bvlgari WatchPrice: 6600$/ }).nth(1).click();
+  await page.getByRole('heading', { name: 'Bvlgari Watch' }).click();
 
   // Expect to land on the product detail page (ensure correct URL or page state)
   await expect(page).toHaveURL(/\/product\//);
@@ -17,7 +17,7 @@ test('Add to cart shows login popup for guest users', async ({ page }) => {
     // Go directly to product page without logging in
     await page.goto('https://aurora.heyappo.me/shop');
   
-    await page.locator('div').filter({ hasText: /^Bvlgari Bvlgari WatchPrice: 6600$/ }).nth(1).click();
+    await page.getByRole('heading', { name: 'Bvlgari Watch' }).click();
 
     // Expect to land on the product detail page (ensure correct URL or page state)
     await expect(page).toHaveURL(/\/product\//);

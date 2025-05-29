@@ -25,12 +25,10 @@ test('Search for "bvlgari" displays the Bvlgari Bvlgari Watch', async ({ page })
   await searchBox.click();
   await searchBox.fill('bvlgari');
 
+  await page.waitForTimeout(2000);
   // Expect the Bvlgari Bvlgari Watch to be visible in results
-  const result = page.getByText('Bvlgari Bvlgari WatchPrice:');
-  await expect(result).toBeVisible();
-
-  // Click on the product
-  await result.click();
+  await page.getByRole('heading', { name: 'Bvlgari Watch' }).click();
+  
 });
 
 
