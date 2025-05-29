@@ -1,0 +1,57 @@
+name: Aurora Integration Test
+
+on:
+  workflow_dispatch:    # Manual trigger
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+
+jobs:
+  run-login-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Run All Playwright Tests
+        run: |
+          npx playwright test \
+            cart-tests \
+            checkout-tests \
+            login-tests \
+            navbar-tests \
+            profile-tests \
+            shop-tests \
+            signup-tests \
+            --reporter=html
+
+
+      - name: Generate readable timestamp
+        id: timestamp
+        run: |
+          export TZ="Europe/Sarajevo"
+          export DATE_STRING=$(date +"%Y-%m-%d_%H-%M")
+          echo "folder_name=${DATE_STRING} - Integration Test" >> $GITHUB_OUTPUT
+
+      - name: Save credentials.json
+        run: echo '${{ secrets.GDRIVE_CREDENTIALS_JSON }}' > credentials.json
+
+      - name: Install dependecies for upload script
+        run: npm install googleapis
+        
+      - name: Upload report to Google Drive
+        env:
+          GDRIVE_FOLDER_ID: 1ddQAUYcfu_Y2AvVl8JO7fw1TQ8SgiZ7i  # Google Disk Folder ID
+          REPORT_FOLDER_NAME: ${{ steps.timestamp.outputs.folder_name }}
+        run: node upload-to-drive.js
