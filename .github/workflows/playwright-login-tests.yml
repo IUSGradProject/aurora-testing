@@ -31,17 +31,13 @@ jobs:
       - name: Zip the Playwright report
         run: zip -r playwright-report.zip playwright-report/
 
-      - name: Install gdrive CLI
-        run: |
-          wget -O gdrive https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64
-          chmod +x gdrive
-          sudo mv gdrive /usr/local/bin/gdrive
-
       - name: Save credentials.json
         run: echo '${{ secrets.GDRIVE_CREDENTIALS_JSON }}' > credentials.json
 
+      - name: Install dependecies for upload script
+        run: npm install googleapis
+        
       - name: Upload report to Google Drive
         env:
-          FOLDER_ID: 1ddQAUYcfu_Y2AvVl8JO7fw1TQ8SgiZ7i  # Google Disk Folder ID
-        run: |
-          gdrive upload --service-account credentials.json --parent $FOLDER_ID playwright-report.zip
+          GDRIVE_FOLDER_ID: 1ddQAUYcfu_Y2AvVl8JO7fw1TQ8SgiZ7i  # Google Disk Folder ID
+        run: node upload-to-drive.js
