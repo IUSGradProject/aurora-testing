@@ -32,8 +32,8 @@ jobs:
         id: timestamp
         run: |
           export TZ="Europe/Sarajevo"
-          export DATE_STRING=$(date +"%d %B %Y, %H:%M")
-          echo "folder_name=${DATE_STRING}" >> $GITHUB_OUTPUT
+          export DATE_STRING=$(date +"%Y-%m-%d_%H-%M")
+          echo "folder_name=${DATE_STRING} - Login Test" >> $GITHUB_OUTPUT
 
       - name: Save credentials.json
         run: echo '${{ secrets.GDRIVE_CREDENTIALS_JSON }}' > credentials.json
