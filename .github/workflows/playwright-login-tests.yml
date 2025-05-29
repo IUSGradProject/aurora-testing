@@ -31,6 +31,7 @@ jobs:
       - name: Generate readable timestamp
         id: timestamp
         run: |
+          export TZ="Europe/Sarajevo"
           export DATE_STRING=$(date +"%d %B %Y, %H:%M")
           echo "folder_name=${DATE_STRING}" >> $GITHUB_OUTPUT
 
