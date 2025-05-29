@@ -2,8 +2,18 @@ name: Daily Availability Test
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Runs every day at 6 AM UTC
+    - cron: '*/30 * * * *'  # Runs every 30 Minutes UTC
   workflow_dispatch:  # So it could be run through GitHub UI
+
+  push:
+    branches: 
+      - main
+    paths: 
+      - '**'
+      
+  repository_dispatch:  #Triggers from other repos
+    types: [trigger-tests]
+    
 
 jobs:
   availability-check:
