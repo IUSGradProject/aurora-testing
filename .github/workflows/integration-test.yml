@@ -4,7 +4,16 @@ on:
   workflow_dispatch:    # Manual trigger
   schedule:
     - cron: '0 */6 * * *'  # Every 6 hours
-
+    
+  push:
+    branches: 
+      - main
+    paths: 
+      - '**'
+      
+  repository_dispatch:  #Triggers from other repos
+    types: [trigger-tests]
+    
 jobs:
   run-all-tests:
     runs-on: ubuntu-latest
