@@ -28,8 +28,11 @@ jobs:
         run: |
           npx playwright test login-tests/login.spec.js --reporter=html
 
-      - name: Zip the Playwright report
-        run: zip -r playwright-report.zip playwright-report/
+      - name: Generate readable timestamp
+        id: timestamp
+        run: |
+          export DATE_STRING=$(date +"%d %B %Y, %H:%M")
+          echo "folder_name=${DATE_STRING}" >> $GITHUB_OUTPUT
 
       - name: Save credentials.json
         run: echo '${{ secrets.GDRIVE_CREDENTIALS_JSON }}' > credentials.json
@@ -40,4 +43,5 @@ jobs:
       - name: Upload report to Google Drive
         env:
           GDRIVE_FOLDER_ID: 1ddQAUYcfu_Y2AvVl8JO7fw1TQ8SgiZ7i  # Google Disk Folder ID
+          REPORT_FOLDER_NAME: ${{ steps.timestamp.outputs.folder_name }}
         run: node upload-to-drive.js
