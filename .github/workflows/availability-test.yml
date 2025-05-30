@@ -1,4 +1,4 @@
-name: Daily Availability Test
+name: Half-Hourly Availability Test
 
 on:
   schedule:
