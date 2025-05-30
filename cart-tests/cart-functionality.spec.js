@@ -177,7 +177,7 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
   await page.getByText('Product successfully added to').click();
   // Verify cart page URL
   await page.goto('https://aurora.heyappo.me/cart');
-
+  await page.waitForTimeout(2000);
   // Change quantity to 10
   const quantityInput = page.getByRole('spinbutton');
   await quantityInput.fill('');
