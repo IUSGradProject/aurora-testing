@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Clicking a product opens the product detail page', async ({ page }) => {
+test('Clicking on category for watches displays Bvlgari Watch', async ({ page }) => {
   // Go to the shop page
   await page.goto('https://aurora.heyappo.me/shop');
 
@@ -16,7 +16,7 @@ test('Clicking a product opens the product detail page', async ({ page }) => {
 });
 
 
-test('Search for "bvlgari" displays the Bvlgari Bvlgari Watch', async ({ page }) => {
+test('Search for "bvlgari" displays the Bvlgari Watch', async ({ page }) => {
   // Go to the shop page
   await page.goto('https://aurora.heyappo.me/shop');
 
@@ -42,9 +42,9 @@ test('Search for invalid term displays no products found message', async ({ page
   await searchBox.fill('aaa');
 
   // Expect the "no products found" message to be visible
+  await page.waitForTimeout(2000);
   const noResultsMessage = page.getByRole('heading', { name: 'Oops! No products found.' });
   await expect(noResultsMessage).toBeVisible();
 
-  // Optionally click it (if needed)
-  await noResultsMessage.click();
+  
 });
