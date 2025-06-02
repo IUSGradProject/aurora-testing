@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test('User logs in clicks on product, adds product to the cart then proceeds with checkout ', async ({ page }) => {
      // Go to login page and log in
      await page.goto('https://aurora.heyappo.me/login');
-     await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
+     await page.getByRole('textbox', { name: 'Email' }).fill('aa1@gmail.com');
      await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
      await page.getByRole('button', { name: 'Login' }).click();
    
@@ -58,7 +58,7 @@ test('User logs in, purchases two products', async ({ page }) => {
      // Go to shop and log in
      await page.goto('https://aurora.heyappo.me/shop');
      await page.getByRole('link', { name: ' LOG IN' }).click();
-     await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
+     await page.getByRole('textbox', { name: 'Email' }).fill('aa1@gmail.com');
      await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
      await page.getByRole('button', { name: 'Login' }).click();
    
@@ -109,7 +109,7 @@ test('Buy Now from product page works without visiting the cart', async ({ page 
   // Go to shop and log in
   await page.goto('https://aurora.heyappo.me/shop');
   await page.getByRole('link', { name: ' LOG IN' }).click();
-  await page.getByRole('textbox', { name: 'Email' }).fill('aa@gmail.com');
+  await page.getByRole('textbox', { name: 'Email' }).fill('aa1@gmail.com');
   await page.getByRole('textbox', { name: 'Password' }).fill('anesaneS123!');
   await page.getByRole('button', { name: 'Login' }).click();
    
