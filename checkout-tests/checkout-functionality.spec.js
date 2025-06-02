@@ -79,9 +79,10 @@ test('User logs in, purchases two products', async ({ page }) => {
 
      // Go to cart and select both products
      await page.goto('https://aurora.heyappo.me/cart');
+     await page.waitForTimeout(2000);
      await page.getByRole('checkbox').first().check();
      await page.getByRole('checkbox').nth(1).check();
-   
+     await page.waitForTimeout(2000);
      // Proceed to checkout
      await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
      await page.getByRole('textbox', { name: 'Full Name' }).fill('Anes');

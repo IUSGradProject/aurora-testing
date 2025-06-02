@@ -107,7 +107,7 @@ test('User logs in, opens product page, adds product to cart, and verifies it', 
     // Verify the product is listed in the cart
     await expect(page.getByRole('heading', { name: 'Bvlgari Watch' })).toBeVisible();
   
-    await page.goto('https://aurora.heyappo.me/cart');
+    
     await page.waitForTimeout(2000);
     // Remove the product from the cart
     await page.getByRole('button', { name: '' }).click();
@@ -182,14 +182,14 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
   const quantityInput = page.getByRole('spinbutton');
   await quantityInput.fill('');
   await quantityInput.fill('10');
-
+  await page.waitForTimeout(2000);
   // Check the checkbox to enable checkout
   await page.getByRole('checkbox').check();
 
   // Verify total is updated accordingly (replace this with dynamic check if needed)
   const totalText = await page.getByText('Total: $432,005.99');
   await expect(totalText).toBeVisible();
-
+  await page.waitForTimeout(2000);
   // Verify redirection to cart page
   await page.goto('https://aurora.heyappo.me/cart');
 
