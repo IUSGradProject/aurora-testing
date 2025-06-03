@@ -39,10 +39,11 @@ test('Search for invalid term displays no products found message', async ({ page
   // Enter an invalid search query
   const searchBox = page.getByRole('searchbox', { name: 'Search for items...' });
   await searchBox.click();
+  await page.waitForTimeout(2000);
   await searchBox.fill('aaa');
 
   // Expect the "no products found" message to be visible
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(3000);
   const noResultsMessage = page.getByRole('heading', { name: 'Oops! No products found.' });
   await expect(noResultsMessage).toBeVisible();
 
