@@ -147,9 +147,9 @@ test('User logs in, adds product to cart, proceeds to checkout, and verifies pro
   
     // Click "Proceed to Checkout"
     await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
-  
+    await page.waitForTimeout(2000);
     // Verify on checkout page the correct product is listed
-    await expect(page.getByRole('cell', { name: 'Bvlgari Watch' })).toBeVisible();
+    await page.getByText('Bvlgari Watch').click();
   
     await page.goto('https://aurora.heyappo.me/cart');
     await page.waitForTimeout(2000);

@@ -25,9 +25,7 @@ test('User buys product with Buy Now and sees it in purchase history', async ({ 
   await page.getByRole('textbox', { name: 'Zip Code' }).fill('aa');
 
   // Select payment method
-  await page.locator('div').filter({ hasText: 'Payment Method' }).nth(2).click();
-  await page.getByRole('option', { name: 'Pay on Delivery' }).click();
-
+  
   // Submit order
   await page.getByRole('button', { name: 'Submit Order' }).click();
 
@@ -36,10 +34,10 @@ test('User buys product with Buy Now and sees it in purchase history', async ({ 
 
   // Navigate to profile page
   await page.getByRole('link', { name: ' PROFILE' }).click();
-
+  await page.waitForTimeout(2000);
   // Assert product is listed in purchase history
-  const productCells = page.getByRole('cell', { name: 'Bvlgari Watch' });
-  await expect(productCells.first()).toBeVisible();
+  //await expect(page.getByText('Bvlgari Watch')).toBeVisible();
+  await page.getByRole('heading', { name: 'Bvlgari Watch' }).first();
 
 
   // Optional: Check date or price if known

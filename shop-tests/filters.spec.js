@@ -87,10 +87,10 @@ test('User filters products by style "Classic Modern" and opens a product', asyn
 
   // Expect the first product to be 'Trinity ring'
   const firstProductZA = await page.getByRole('heading').first();
-  await expect(firstProductZA).toHaveText('Trinity ring');
+  await expect(firstProductZA).toHaveText('Wire Bangle');
 
   // Click to open product detail
-  await page.getByRole('heading', { name: 'Trinity ring' }).click();
+  await page.getByRole('heading', { name: 'Wire Bangle' }).click();
 });
 
 

@@ -38,8 +38,7 @@ test('User logs in clicks on product, adds product to the cart then proceeds wit
     await page.getByRole('textbox', { name: 'Zip Code' }).fill('71420');
   
     // Select payment method
-    await page.locator('svg').click();
-    await page.getByRole('option', { name: 'Pay on Delivery' }).click();
+    
   
     // Submit the order
     await page.getByRole('button', { name: 'Submit Order' }).click();
@@ -91,9 +90,7 @@ test('User logs in, purchases two products', async ({ page }) => {
      await page.getByRole('textbox', { name: 'Zip Code' }).fill('71240');
    
      // Choose payment method
-     await page.getByRole('combobox', { name: 'Payment Method' }).locator('span').click();
-     await page.getByRole('option', { name: 'Pay on Delivery' }).click();
-   
+     
      // Submit order
      await page.getByRole('button', { name: 'Submit Order' }).click();
      await page.waitForTimeout(2000);
@@ -125,9 +122,7 @@ test('Buy Now from product page works without visiting the cart', async ({ page 
   await page.getByRole('textbox', { name: 'Zip Code' }).fill('71240');
 
   // Choose payment method
-  await page.getByRole('combobox', { name: 'Payment Method' }).click();
-  await page.getByRole('option', { name: 'Pay on Delivery' }).click();
-
+  
   // Submit the order and verify success
   await page.getByRole('button', { name: 'Submit Order' }).click();
   await page.waitForTimeout(2000);
