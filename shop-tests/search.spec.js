@@ -5,8 +5,8 @@ test('Clicking on category for watches displays Bvlgari Watch', async ({ page })
   await page.goto('https://aurora.heyappo.me/shop');
 
   // Open the category dropdown and select 'Watches'
-  await page.getByText('All Categories ▼').click();
-  await page.getByText('Watches ▼').click();
+  await page.getByText('All Categories').click();
+  await page.getByText('Watches').click();
 
   // Click on the specific product
   await page.locator('div').filter({ hasText: /^Bvlgari Bvlgari WatchPrice: 6600$/ }).nth(1).click();
