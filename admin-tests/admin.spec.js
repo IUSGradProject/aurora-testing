@@ -1,6 +1,6 @@
-//const { test, expect } = require('@playwright/test');
+/*const { test, expect } = require('@playwright/test');
 
-/*
+
 test('Login, add product, delete it, verify in deleted products', async ({ page }) => {
   // Login
   await page.goto('https://aurora.heyappo.me/shop');
@@ -49,11 +49,11 @@ test('Login, add product, delete it, verify in deleted products', async ({ page 
     const productCell = page.getByRole('cell', { name: 'test' });
     if (await productCell.isVisible()) break;
   }
-*/
-/*
+
+
   // Select and delete the product
   await page.getByRole('cell', { name: 'test' }).click();
-  await page.getByRole('row', { name: /test.*\$10\.00.*/  /*}).getByRole('button').nth(1).click(); // delete icon
+  await page.getByRole('row', { name: /test.*\$10\.00.*/ /* }).getByRole('button').nth(1).click(); // delete icon
   await page.getByRole('button', { name: 'Delete', exact: true }).click();
 
   // Go to Deleted Products
