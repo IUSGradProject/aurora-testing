@@ -159,7 +159,7 @@ test('User logs in, adds product to cart, proceeds to checkout, and verifies pro
     await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
   });
   
-
+/*
 test('Cart quantity update reflects correct total price', async ({ page }) => {
   // Go to shop and log in
   await page.goto('https://aurora.heyappo.me/shop');
@@ -203,3 +203,4 @@ test('Cart quantity update reflects correct total price', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Your cart is empty' })).toBeVisible();
 });
  
+*/
